@@ -12,7 +12,11 @@ docker run -d --name mariadb_server \
   mariadb
 
 docker ps -a
+netstat -na -f inet | grep LISTEN | grep 3306
+```
 
+#### connect to mariadb server
+```
 docker exec -it mariadb_server /bin/bash
 mariadb -u root -p
 
