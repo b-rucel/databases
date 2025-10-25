@@ -4,6 +4,7 @@
     "": {
       "name": "nodejs",
       "dependencies": {
+        "dotenv": "^17.2.3",
         "winston": "^3.18.3",
       },
     },
@@ -26,6 +27,8 @@
     "color-name": ["color-name@2.0.2", "", {}, "sha512-9vEt7gE16EW7Eu7pvZnR0abW9z6ufzhXxGXZEVU9IqPdlsUiMwJeJfRtq0zePUmnbHGT9zajca7mX8zgoayo4A=="],
 
     "color-string": ["color-string@2.1.2", "", { "dependencies": { "color-name": "^2.0.0" } }, "sha512-RxmjYxbWemV9gKu4zPgiZagUxbH3RQpEIO77XoSSX0ivgABDZ+h8Zuash/EMFLTI4N9QgFPOJ6JQpPZKFxa+dA=="],
+
+    "dotenv": ["dotenv@17.2.3", "", {}, "sha512-JVUnt+DUIzu87TABbhPmNfVdBDt18BLOWjMUFJMSi/Qqg7NTYtabbvSNJGOJ7afbRuv9D/lngizHtP7QyLQ+9w=="],
 
     "enabled": ["enabled@2.0.0", "", {}, "sha512-AKrN98kuwOzMIdAizXGI86UFBoo26CL21UM763y1h/GMSJ4/OHU9k2YlsmBpyScFo/wbLzWQJBMCW4+IO3/+OQ=="],
 
