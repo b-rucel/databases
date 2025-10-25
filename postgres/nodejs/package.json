@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "db:setup": "node ./setup-db.js"
   },
   "keywords": [],
   "author": "",
@@ -11,6 +11,7 @@
   "description": "",
   "dependencies": {
     "dotenv": "^17.2.3",
+    "pg": "^8.16.3",
     "winston": "^3.18.3"
   }
 }
