@@ -12,7 +12,7 @@ async function setupDatabase() {
 
   try {
     const dbName = process.env.DB_NAME || 'pulsechain_explorer';
-    
+
     // Check if database exists
     const result = await db.query(
       `SELECT 1 FROM pg_database WHERE datname = $1`,
@@ -27,12 +27,41 @@ async function setupDatabase() {
       console.log(`✅ Database "${dbName}" already exists.\n`);
     }
 
+    // Check if tables already exist
+    const tableCheckQuery = `
+      SELECT table_name
+      FROM information_schema.tables
+      WHERE table_schema = 'public'
+      AND table_type = 'BASE TABLE'
+      AND table_name IN (
+        'blocks', 'addresses', 'transactions', 'logs',
+        'tokens', 'token_transfers', 'smart_contracts', 'internal_transactions'
+      )
+      ORDER BY table_name;
+    `;
+
+    const existingTables = await db.query(tableCheckQuery);
+
+    if (existingTables.rows.length > 0) {
+      console.log(colors.red + `⚠️  ${colors.bold}WARNING${colors.reset}: The following tables already exist:`);
+      existingTables.rows.forEach(row => {
+        console.log(colors.mint + `   - ${row.table_name}` + colors.reset);
+      });
+
+      process.exit()
+      console.log('\n⚠️  Running this script will DROP and recreate all tables.');
+      console.log('⚠️  This will DELETE ALL DATA in these tables!\n');
+
+
+      // You could add a confirmation prompt here if needed
+      // For now, we'll just log the warning and continue
+    }
+
     // read sql file
     const sqlPath = path.join(__dirname, 'sql', 'create.tables.sql');
     const sqlQuery = fs.readFileSync(sqlPath, 'utf8');
 
-    // console.log(sqlQuery);
-    console.log('📄 Running sql file: create.tables.sql');
+    console.log('📄 Running sql file: create.tables.sql\n');
 
     await db.query(sqlQuery);
 
