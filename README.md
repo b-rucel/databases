@@ -1,4 +1,4 @@
 
 # databases
 
-notes about db i'm using
+notes about dbs i'm using

@@ -33,6 +33,44 @@ psql -U myuser -d mydatabase
 docker exec -it postgres-db psql -U myuser -d mydatabase
 ```
 
+**Persistent volumes:**
+```sh
+# Create a named volume for data persistence
+docker volume create postgres-data
+
+# Run with volume mounted
+docker run --name postgres-db \
+  -e POSTGRES_PASSWORD=mysecretpassword \
+  -e POSTGRES_USER=myuser \
+  -e POSTGRES_DB=mydatabase \
+  -p 5432:5432 \
+  -v postgres-data:/var/lib/postgresql/data \
+  -d postgres
+
+# Or use bind mount to host directory
+docker run --name postgres-db \
+  -e POSTGRES_PASSWORD=mysecretpassword \
+  -e POSTGRES_USER=myuser \
+  -e POSTGRES_DB=mydatabase \
+  -p 5432:5432 \
+  -v /path/on/host:/var/lib/postgresql/data \
+  -d postgres
+
+# postgres 18 is on new data dir
+/var/lib/postgresql/18/docker
+psql --version
+psql (PostgreSQL) 18.0 (Debian 18.0-1.pgdg13+3)
+
+# List volumes
+docker volume ls
+
+# Inspect volume
+docker volume inspect postgres-data
+
+# Remove volume (data will be deleted!)
+docker volume rm postgres-data
+```
+
 - docker-compose
 ```yml
   postgres:
@@ -44,6 +82,8 @@ docker exec -it postgres-db psql -U myuser -d mydatabase
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: example
+    volumes:
+      - db-data:/etc/data
 ```
 ---
 
