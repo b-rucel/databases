@@ -5,7 +5,7 @@ const { Pool } = require('pg');
 const config = {
   host: process.env.DB_HOST || 'localhost',
   port: parseInt(process.env.DB_PORT || '5432'),
-  database: process.env.DB_NAME || 'pulsechain_explorer',
+  database: 'postgres', // set this to postgres, since setup might need to create the db
   user: process.env.DB_USER || 'postgres',
   password: process.env.DB_PASSWORD,
   max: 20,
