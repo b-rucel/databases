@@ -44,7 +44,7 @@ async function resetDatabase() {
     await db.query(`DROP DATABASE IF EXISTS ${dbName}`);
 
     console.log(`✅ Database "${dbName}" dropped successfully!\n`);
-
+    await db.close();
   } catch (error) {
     console.error('❌ Reset failed:', error.message);
     console.error(error);
