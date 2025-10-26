@@ -52,7 +52,6 @@ async function setupDatabase() {
       console.log('\n⚠️  Running this script will DROP and recreate all tables.');
       console.log('⚠️  This will DELETE ALL DATA in these tables!\n');
 
-
       // You could add a confirmation prompt here if needed
       // For now, we'll just log the warning and continue
     }
@@ -60,11 +59,9 @@ async function setupDatabase() {
     // read sql file
     const sqlPath = path.join(__dirname, 'sql', 'create.tables.sql');
     const sqlQuery = fs.readFileSync(sqlPath, 'utf8');
-
     console.log('📄 Running sql file: create.tables.sql\n');
 
     await db.query(sqlQuery);
-
     console.log(`✅ SQL completed successfully!\n`);
 
     await db.close();
@@ -73,7 +70,6 @@ async function setupDatabase() {
     console.error(error);
     process.exit(1);
   }
-
 }
 
 // Run setup
