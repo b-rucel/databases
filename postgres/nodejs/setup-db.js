@@ -48,12 +48,8 @@ async function setupDatabase() {
         console.log(colors.mint + `   - ${row.table_name}` + colors.reset);
       });
 
+      // stop the process if tables exist
       process.exit()
-      console.log('\n⚠️  Running this script will DROP and recreate all tables.');
-      console.log('⚠️  This will DELETE ALL DATA in these tables!\n');
-
-      // You could add a confirmation prompt here if needed
-      // For now, we'll just log the warning and continue
     }
 
     // read sql file
